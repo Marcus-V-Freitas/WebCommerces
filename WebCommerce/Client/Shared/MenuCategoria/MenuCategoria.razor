@@ -1,0 +1,31 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<homeLocalizer> localizer
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown">
+        @localizer[homeLocalizer.tituloMenuCategoria]
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+        @if (categorias != null)
+        {
+            @foreach (var categoria in categorias)
+            {
+                <li class="dropdown-item">
+                    <a class="btn" @onclick="(() => ProdutosCategoria(categoria.Id))">
+                        @categoria.Nome
+                    </a>
+                </li>
+            }
+            <li class="divider"></li>
+            <li class="dropdown-item">
+                <a class="btn" @onclick="(() => ProdutosCategoria(0))">
+                    @localizer[homeLocalizer.todasCategorias]
+                </a>
+            </li>
+        }
+    </ul>
+</li>
+
+@code{
+
+}

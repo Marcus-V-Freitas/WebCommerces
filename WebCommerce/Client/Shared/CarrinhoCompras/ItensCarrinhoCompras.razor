@@ -1,0 +1,56 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<homeLocalizer> localizer
+
+@if (carrinho.CarrinhoCompras != null)
+{
+    <table class="table table-bordered table-st>0riped">
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>@localizer[homeLocalizer.CarrinhoMensagemSelecione]</th>
+                <th>@localizer[homeLocalizer.Produto]</th>
+                <th class="text-right">@localizer[homeLocalizer.Preco]</th>
+                <th class="text-right">@localizer[homeLocalizer.Quantidade]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (carrinho.CarrinhoCompras.ItensCarrinho != null)
+            {
+                @foreach (var item in carrinho.CarrinhoCompras.ItensCarrinho)
+                {
+                    <tr>
+                        <td class="text-left">
+                            <button class="btn btn-primary" @onclick="(() => Adicionar(item.ProdutoId))">+</button>
+                            <button class="btn btn-primary" @onclick="(() => Remover(item.ProdutoId))">-</button>
+                        </td>
+                        <td class="text-center">@item.Quantidade</td>
+                        <td class="text-left">@item.Produto.Nome</td>
+                        <td class="text-right">@item.Produto.Valor.ToString("c")</td>
+                        <td class="text-right">@((item.Quantidade * item.Produto.Valor).ToString("c"))</td>
+                    </tr>
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" class="text-right">@localizer[homeLocalizer.Total]</td>
+                <td class="text-right">@carrinho.TotalCompra.ToString("c")</td>
+            </tr>
+        </tfoot>
+
+    </table>
+}
+else
+{
+    <WebCommerce.Client.Shared.Carregamento.Carregando />
+}
+<div class="text-center">
+    <button class="btn btn-primary" @onclick="@(() => RemoverTodos(0))">@localizer[homeLocalizer.Limpar]</button>
+    <NavLink href="/Finalizar">
+        <button class="btn btn-primary">@localizer[homeLocalizer.CheckOut]</button>
+    </NavLink>
+</div>
+
+@code
+{
+
+}

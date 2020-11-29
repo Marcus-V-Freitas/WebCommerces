@@ -1,0 +1,61 @@
+﻿@layout LoginLayout
+@page "/DetalheProduto/{id}"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<homeLocalizer> localizer;
+
+@if (produto.Produto != null)
+{
+    <h1>@produto.Produto.Nome</h1>
+
+    <div class="thumbnail" disabled="disabled">
+        <img alt="@produto.Produto.Nome" src="@produto.Produto.ImageThumbnailUrl" />
+        <div class="caption-full">
+            <h3 class="pull-right">@produto.Produto.Valor.ToString("C")</h3>
+            <h3 style="color: #337ab7">@produto.Produto.Nome</h3>
+            <p>@produto.Produto.Descricao</p>
+            <article>
+                <RadzenRating Stars="5" Name="divEstrelas" Value="(produto.Produto.MediaProduto)" />
+            </article>
+        </div>
+        <div class="addToCart">
+            <p class="button">
+                @if (produto.QuantidadeDisponivel > 0)
+                {
+                    <a class="btn btn-primary" @onclick="(() => Adicionar(produto.Produto.ID))">+</a>
+                }
+                else
+                {
+                    <b class="alert-danger">@localizer[homeLocalizer.Esgotado]</b>
+                }
+            </p>
+        </div>
+        <ProdutoComentario ProdutoID="produto.Produto.ID" />
+        @if (produto.Produto.ClassificacaoProdutos is not null)
+        {
+            <RadzenCard>
+                <div class="row">
+                    @foreach (var item in produto.Produto.ClassificacaoProdutos)
+                    {
+
+                        <div class="col-md-6 borderSolid">
+                            <div><h1>@item.Classificacao<RadzenIcon Icon="grade" Style="font-size:20px;" /></h1></div>
+                            <b>@item.Usuario.Nome - @item.DataRegistro.Date.ToString("dd/MM/yyyy")</b>
+                            <div style="margin-top:20px"></div>
+                            <p>@item.Comentario</p>
+                            <br />
+                        </div>
+
+                    }
+                </div>
+            </RadzenCard>
+        }
+        else
+        {
+            <p>@localizer[homeLocalizer.NaoHaComentarios]</p>
+        }
+    </div>
+}
+else
+{
+    <WebCommerce.Client.Shared.Carregamento.Carregando />
+}
+

@@ -1,0 +1,12 @@
+<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(Program).Assembly">
+        <Found Context="routeData">
+            <RouteView RouteData="@routeData" DefaultLayout="@typeof(LoginLayout)" />
+        </Found>
+        <NotFound>
+            <LayoutView Layout="@typeof(LoginLayout)">
+                <WebCommerce.Client.Shared.Error.StatusCode404 />
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>

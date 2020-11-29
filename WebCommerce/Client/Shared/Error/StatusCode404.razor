@@ -1,0 +1,19 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<errorLocalizer> localizer
+
+
+<div class="row">
+    <div class="col-8">
+        <h1>@localizer[errorLocalizer.MensagemErro404]</h1>
+        <p>
+            @localizer[errorLocalizer.Erro404]
+            <br />
+            <br />
+            <NavLink href="/">
+                <a class="btn btn-outline-primary">@localizer[errorLocalizer.MensagemRetorno]</a>
+            </NavLink>
+        </p>
+    </div>
+    <div class="col-4">
+        <img src="/Images/Error404.jpg" style="width:100%" alt="@localizer[errorLocalizer.MensagemErro404]" />
+    </div>
+</div>

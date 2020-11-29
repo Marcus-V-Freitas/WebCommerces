@@ -1,0 +1,99 @@
+﻿@layout LoginLayout
+@inject Microsoft.Extensions.Localization.IStringLocalizer<homeLocalizer> localizer
+
+
+<EditForm Model="@produto" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    @* Id *@
+    <div class="form-group">
+        <label>@(Metodo.GetDisplayName<Produto, int>(i => i.ID))</label>
+        <InputNumber @bind-Value="@produto.ID" class="form form-control" ReadOnly />
+    </div>
+
+    @* Nome *@
+    <div class="form-group">
+        <label>@(Metodo.GetDisplayName<Produto, string>(i => i.Nome))</label>
+        <InputText @bind-Value="@produto.Nome" class="form form-control" />
+    </div>
+
+    @* Valor *@
+    <div class="form-group">
+        <label>@(Metodo.GetDisplayName<Produto, double>(i => i.Valor))</label>
+        <InputNumber @bind-Value="@produto.Valor" class="form form-control" />
+    </div>
+
+    @* Descrição *@
+    <div class="form-group">
+        <label>@(Metodo.GetDisplayName<Produto, string>(i => i.Descricao))</label>
+        <InputText @bind-Value="@produto.Descricao" class="form form-control" />
+    </div>
+
+    @* Peso *@
+    <div class="form-group">
+        <label>@(Metodo.GetDisplayName<Produto, double>(i => i.Peso))</label>
+        <InputNumber @bind-Value="@produto.Peso" class="form form-control" />
+    </div>
+
+    @* Largura *@
+    <div class="form-group">
+        <label>@(Metodo.GetDisplayName<Produto, int>(i => i.Largura))</label>
+        <InputNumber @bind-Value="@produto.Largura" class="form form-control" />
+    </div>
+
+    @* Altura *@
+    <div class="form-group">
+        <label>@(Metodo.GetDisplayName<Produto, int>(i => i.Altura))</label>
+        <InputNumber @bind-Value="@produto.Altura" class="form form-control" />
+    </div>
+
+    @* Comprimento *@
+    <div class="form-group">
+        <label>@(Metodo.GetDisplayName<Produto, int>(i => i.Comprimento))</label>
+        <InputNumber @bind-Value="@produto.Comprimento" class="form form-control" />
+    </div>
+
+    @* MediaProduto *@
+    <InputNumber @bind-Value="@produto.MediaProduto" visible="@false" class="form form-control"></InputNumber>
+
+    @* Imagem *@
+    <div>
+        <label>@(Metodo.GetDisplayName<Produto, string>(i => i.ImageThumbnailUrl))</label>
+        <img width="100" height="100" style="display:block" id="imgFoto"
+             src="@produto.ImageThumbnailUrl" />
+        <input type="file" id="fuFoto" @ref="fuFoto"
+               accept="image/png,image/jpg,image/jpeg" @onchange="preview" />
+    </div>
+
+
+    @* Categoria *@
+    <div class="form-group">
+        <label>@(Metodo.GetDisplayName<Produto, int>(i => i.CategoriaId))</label>
+        <select class="form form-control" @onchange="@Change">
+            @if (Categorias != null)
+            {
+                <option value="">@localizer[homeLocalizer.MensagemSelecionar]</option>
+                @foreach (var categoria in Categorias)
+                {
+                    if (produto.CategoriaId == categoria.Id)
+                    {
+                        <option value="@categoria.Id" selected>@categoria.Nome</option>
+                    }
+                    else
+                    {
+                        <option value="@categoria.Id">@categoria.Nome</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+
+    <input type="submit" value="@localizer[homeLocalizer.Salvar]" class="btn btn-primary" />
+
+    <NavLink href="/Produtos">
+        <input type="button" value="@localizer[homeLocalizer.Voltar]" class="btn btn-dark" />
+    </NavLink>
+
+</EditForm>
+

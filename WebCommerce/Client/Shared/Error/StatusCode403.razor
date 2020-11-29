@@ -1,0 +1,13 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<errorLocalizer> localizer
+
+<div class="row">
+    <div class="col-8">
+        <h1>@localizer[errorLocalizer.Mensagem403]</h1>
+        <p>
+            @localizer[errorLocalizer.Erro403]
+        </p>
+    </div>
+    <div class="col-4">
+        <img src="/Images/Error403.png" style="width:100%" alt="@localizer[errorLocalizer.Mensagem403]" />
+    </div>
+</div>

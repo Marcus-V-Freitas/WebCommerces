@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<BlazorWebAssemblyEnableLinking>false</BlazorWebAssemblyEnableLinking>
+		<BlazorCacheBootResources>false</BlazorCacheBootResources>
+		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DefineConstants>DEBUG</DefineConstants>
+		<Optimize>true</Optimize>
+	</PropertyGroup>
+	<ItemGroup>
+		<Content Remove="Services\Properties\launchSettings.json" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="Services\Properties\launchSettings.json">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0' ">
+		<PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
+		<PackageReference Include="Epplus" Version="5.4.1" />
+		<PackageReference Include="iText7" Version="7.1.13" />
+		<PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.2.0-preview3.20168.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.DataAnnotations.Validation" Version="3.2.0-rc1.20223.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
+		<PackageReference Include="Radzen.Blazor" Version="2.17.7" />
+		<PackageReference Include="Syncfusion.DocIO.net.core" Version="18.3.0.48" />
+		<PackageReference Include="System.Collections" Version="4.3.0" />
+		<PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+		<PackageReference Include="tewr.blazor.filereader" Version="2.1.0.20274" />
+		<PackageReference Include="toolbelt.blazor.httpclientinterceptor" Version="9.2.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\BLL\BLL.csproj" />
+		<ProjectReference Include="..\..\DAL\DAL.csproj" />
+	</ItemGroup>
+</Project>

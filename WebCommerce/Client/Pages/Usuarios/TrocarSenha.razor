@@ -1,0 +1,43 @@
+﻿@page "/Usuario/TrocarSenha"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<painelLocalizer> localizer;
+@inject Microsoft.Extensions.Localization.IStringLocalizer<validationLocalizer> validation;
+@inject Microsoft.Extensions.Localization.IStringLocalizer<homeLocalizer> _homeLocalizer;
+
+<AuthorizeView>
+    <Authorized Context="authContext">
+        <div class="row">
+            <div class="col">
+                <RadzenTemplateForm TItem="SenhaViewModel" Data=@Model Submit=@OnSubmit>
+                    <RadzenFieldset>
+                        <div class="row">
+                            <div class="col-md-4 align-right">
+                                <RadzenLabel Text=@localizer[painelLocalizer.Senha] />
+                            </div>
+                            <div class="col">
+                                <RadzenPassword style="display: block" Name="Senha" @bind-Value=@Model.Senha />
+                                <RadzenRequiredValidator Component="Senha" Text=@localizer[validationLocalizer.CampoGenericoObrigatorio] Style="position: absolute" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <RadzenLabel Text=@localizer[painelLocalizer.SenhaRepetida] />
+                            </div>
+                            <div class="col">
+                                <RadzenPassword style="display: block" Name="SenhaRepetida" @bind-Value=@Model.SenhaRepetida />
+                                <RadzenRequiredValidator Component="SenhaRepetida" Text=@localizer[validationLocalizer.CampoGenericoObrigatorio] Style="position: absolute" />
+                                <RadzenCompareValidator Visible=@(!string.IsNullOrEmpty(Model.SenhaRepetida)) Value=@Model.Senha Component="SenhaRepetida" Text=@localizer[validationLocalizer.MesmaSenha] Style="position: absolute" />
+                            </div>
+                        </div>
+                        <RadzenButton ButtonType="ButtonType.Submit" Text=@localizer[painelLocalizer.Salvar]></RadzenButton>
+                        <NavLink href="/Usuario/DashBoard">
+                            <input type="button" value="@_homeLocalizer[homeLocalizer.Voltar]" class="btn btn-dark" />
+                        </NavLink>
+                    </RadzenFieldset>
+                </RadzenTemplateForm>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <Redirecionar />
+    </NotAuthorized>
+</AuthorizeView>

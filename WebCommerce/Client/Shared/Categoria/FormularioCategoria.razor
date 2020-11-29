@@ -1,0 +1,31 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<homeLocalizer> localizer
+
+<EditForm Model="categoria" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    @* Id *@
+    <div class="form-group">
+        <label>@(Metodo.GetDisplayName<Categoria, int>(i => i.Id))</label>
+        <InputNumber @bind-Value="categoria.Id" ReadOnly class="form-control" />
+    </div>
+
+    @* Nome *@
+    <div class="form-group">
+        <label>@(Metodo.GetDisplayName<Categoria, string>(i => i.Nome))</label>
+        <InputText @bind-Value="@categoria.Nome" class="form form-control" />
+    </div>
+
+    @* Descrição *@
+    <div class="form-group">
+        <label>@(Metodo.GetDisplayName<Categoria, string>(i => i.Descricao))</label>
+        <InputText @bind-Value="@categoria.Descricao" class="form form-control" />
+    </div>
+
+    <input type="submit" value="@localizer[homeLocalizer.Salvar]" class="btn btn-primary" />
+
+    <NavLink href="/Categorias">
+        <input type="button" value="@localizer[homeLocalizer.Voltar]" class="btn btn-dark" />
+    </NavLink>
+
+</EditForm>

@@ -1,0 +1,59 @@
+﻿<RadzenTemplateForm Data="@Usuario" TItem="Usuario">
+    <div class="row">
+        <div class="col-md-4 align-items-center d-flex">
+            <RadzenLabel Text="@(Metodo.GetDisplayName<Usuario, string>(i => i.Nome))" />
+        </div>
+        <div class="col-md-8">
+            <RadzenTextBox style="width: 100%;" Name="nome" @bind-Value="Usuario.Nome" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 align-items-center d-flex">
+            <RadzenLabel Text="@(Metodo.GetDisplayName<Usuario, DateTime>(i => i.Nascimento))" />
+        </div>
+        <div class="col-md-8">
+            <RadzenDatePicker style="width: 100%;" Name="nascimento" @bind-Value="Usuario.Nascimento" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 align-items-center d-flex">
+            <RadzenLabel Text="@(Metodo.GetDisplayName<Usuario, string>(i => i.CPFCNPJ))" />
+        </div>
+        <div class="col-md-8">
+            <RadzenTextBox style="width: 100%;" Name="cpfcnpj" @bind-Value="Usuario.CPFCNPJ" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 align-items-center d-flex">
+            <RadzenLabel Text="@(Metodo.GetDisplayName<Usuario, Sexo>(i => i.Sexo))" />
+        </div>
+        <div class="col-md-8">
+            <RadzenNumeric style="width: 100%;" Name="sexo" @bind-Value="Usuario.Sexo" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 align-items-center d-flex">
+            <RadzenLabel Text="@(Metodo.GetDisplayName<Usuario, string>(i => i.Senha))" Visible="SenhaVisivel" />
+        </div>
+        <div class="col-md-8">
+            <RadzenTextBox style="width: 100%;" Name="senha" @bind-Value="Usuario.Senha" Visible="SenhaVisivel" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 align-items-center d-flex">
+            <RadzenLabel Text="@(Metodo.GetDisplayName<Usuario, string>(i => i.Email))" />
+        </div>
+        <div class="col-md-8">
+            <RadzenTextBox style="width: 100%;" Name="email" @bind-Value="Usuario.Email" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 align-items-center d-flex">
+            <RadzenLabel Text="@(Metodo.GetDisplayName<Usuario, string>(i => i.Telefone))">
+            </RadzenLabel>
+        </div>
+        <div class="col-md-8">
+            <RadzenTextBox style="width: 100%;" Name="telefone" @bind-Value="Usuario.Telefone" />
+        </div>
+    </div>
+</RadzenTemplateForm>

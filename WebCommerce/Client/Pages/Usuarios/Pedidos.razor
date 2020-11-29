@@ -1,0 +1,86 @@
+﻿@page "/Usuario/Pedidos"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<painelLocalizer> localizer;
+@inject Microsoft.Extensions.Localization.IStringLocalizer<validationLocalizer> validation;
+@inject Microsoft.Extensions.Localization.IStringLocalizer<homeLocalizer> _localizerHome;
+@using BLL.Constants;
+@attribute [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Administrator")]
+
+<AuthorizeView>
+    <Authorized Context="authContext">
+        @if (PedidosCliente is not null && PedidosCliente.Count() > 0)
+        {
+            <RadzenTemplateForm TItem="FiltroDataViewModel" Data=@Filtro Submit=@OnClick Style="width:100%; height:100%;">
+                <RadzenFieldset>
+                    <div class="row">
+                        <div class="col-md-6  col-sm-12 p-4">
+                            <h2>@localizer[painelLocalizer.filtroDatas]</h2>
+                            <div class="col-md-4">
+                                <h4>@localizer[painelLocalizer.DataInicial]</h4>
+                                <RadzenDatePicker @bind-Value=@Filtro.DataInical DateFormat="d" Name="DataInical" />
+                                <RadzenRequiredValidator Component="DataInical" Text=@localizer[validationLocalizer.CampoGenericoObrigatorio] Style="position: absolute" />
+                            </div>
+                            <div class="col-md-4">
+                                <h4>@localizer[painelLocalizer.DataFinal]</h4>
+                                <RadzenDatePicker @bind-Value=@Filtro.Datafinal DateFormat="d" Name="Datafinal" />
+                                <RadzenRequiredValidator Component="Datafinal" Text=@localizer[validationLocalizer.CampoGenericoObrigatorio] Style="position: absolute" />
+                            </div>
+                            <div class="col-md-4">
+                                <RadzenButton ButtonType="ButtonType.Submit" Text="@localizer[painelLocalizer.Buscar]" Style="margin-top:3em;"></RadzenButton>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <RadzenFieldset Style="width:600px;margin-bottom: 20px; height:500px;">
+                                <HeaderTemplate>
+                                    <span>
+                                        <RadzenIcon Icon="account_box" /><b style="font-size:30px">@localizer[painelLocalizer.Pedidos]</b>
+                                    </span>
+                                </HeaderTemplate>
+                                <ChildContent>
+                                    <RadzenDataList PageSize="1" WrapItems="true" AllowPaging="true"
+                                                    Data="@PedidosCliente" TItem="Pedido">
+                                        <Template Context="pedido">
+                                            <RadzenCard Style="width:300px;height:300px">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div>@localizer[painelLocalizer.Pedido] </div>
+                                                        <b>@pedido.Id</b>
+                                                        <div>@localizer[painelLocalizer.Transacao] </div>
+                                                        <b>@pedido.TransactionId</b>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div>@localizer[painelLocalizer.ValorTotal]</div>
+                                                        <b>@pedido.ValorTotal.ToString("C")</b>
+                                                        <div style="margin-top:20px">@localizer[painelLocalizer.DataCompra]</div>
+                                                        <b>@pedido.DataRegistro</b>
+                                                        <div style="margin-top:20px">@localizer[painelLocalizer.Situacao]</div>
+                                                        <b>@pedido.Situacao</b>
+                                                        <div style="margin-top:20px">@localizer[painelLocalizer.FormaPagamento]</div>
+                                                        <b>@(pedido.FormaPagamento)</b>
+                                                    </div>
+                                                    @if (PedidoSituacaoConstant.SituacoesPedido.TryGetValue(pedido.Situacao, out int valor) && valor <= 1)
+                                                    {
+                                                        <button class="btn btn-primary" @onclick="()=>CancelarPedido(pedido.Id)">@localizer[painelLocalizer.Cancelar]</button>
+                                                    }
+                                                </div>
+                                            </RadzenCard>
+                                        </Template>
+                                    </RadzenDataList>
+                                </ChildContent>
+                            </RadzenFieldset>
+                        </div>
+                    </div>
+                    <NavLink href="/Usuario/DashBoard">
+                        <input type="button" value="@_localizerHome[homeLocalizer.Voltar]" class="btn btn-dark" />
+                    </NavLink>
+                </RadzenFieldset>
+            </RadzenTemplateForm>
+        }
+        else
+        {
+            <p>@localizer[painelLocalizer.NaoHaDados]</p>
+        }
+    </Authorized>
+    <NotAuthorized>
+        <Redirecionar />
+    </NotAuthorized>
+</AuthorizeView>

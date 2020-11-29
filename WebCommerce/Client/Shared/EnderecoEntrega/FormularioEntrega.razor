@@ -1,0 +1,67 @@
+﻿<RadzenTemplateForm Data="@Endereco" TItem="EnderecoEntrega">
+    <div class="row">
+        <div class="col-md-4 align-items-center d-flex">
+            <RadzenLabel Text="@(Metodo.GetDisplayName<EnderecoEntrega, string>(i => i.Nome))" />
+        </div>
+        <div class="col-md-8">
+            <RadzenTextBox style="width: 100%;" Name="nome" @bind-Value="Endereco.Nome" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 align-items-center d-flex">
+            <RadzenLabel Text="@(Metodo.GetDisplayName<EnderecoEntrega, string>(i => i.Endereco))" />
+        </div>
+        <div class="col-md-8">
+            <RadzenTextBox style="width: 100%;" Name="endereco" @bind-Value="Endereco.Endereco" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 align-items-center d-flex">
+            <RadzenLabel Text="@(Metodo.GetDisplayName<EnderecoEntrega, string>(i => i.Bairro))" />
+        </div>
+        <div class="col-md-8">
+            <RadzenTextBox style="width: 100%;" Name="bairro" @bind-Value="Endereco.Bairro" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 align-items-center d-flex">
+            <RadzenLabel Text="@(Metodo.GetDisplayName<EnderecoEntrega, string>(i => i.Cidade))" />
+        </div>
+        <div class="col-md-8">
+            <RadzenTextBox style="width: 100%;" Name="cidade" @bind-Value="Endereco.Cidade" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 align-items-center d-flex">
+            <RadzenLabel Text="@(Metodo.GetDisplayName<EnderecoEntrega, string>(i => i.Estado))" />
+        </div>
+        <div class="col-md-8">
+            <RadzenTextBox style="width: 100%;" Name="estado" @bind-Value="Endereco.Estado" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 align-items-center d-flex">
+            <RadzenLabel Text="@(Metodo.GetDisplayName<EnderecoEntrega, string>(i => i.Numero))" />
+        </div>
+        <div class="col-md-8">
+            <RadzenNumeric style="width: 100%;" Name="numero" @bind-Value="Endereco.Numero" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 align-items-center d-flex">
+            <RadzenLabel Text="@(Metodo.GetDisplayName<EnderecoEntrega, string>(i => i.CEP))" />
+        </div>
+        <div class="col-md-8">
+            <RadzenTextBox style="width: 100%;" Name="cep" @bind-Value="Endereco.CEP" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 align-items-center d-flex">
+            <RadzenLabel Text="@(Metodo.GetDisplayName<EnderecoEntrega, string>(i => i.Complemento))">
+            </RadzenLabel>
+        </div>
+        <div class="col-md-8">
+            <RadzenTextBox style="width: 100%;" Name="complemento" @bind-Value="Endereco.Complemento" />
+        </div>
+    </div>
+</RadzenTemplateForm>

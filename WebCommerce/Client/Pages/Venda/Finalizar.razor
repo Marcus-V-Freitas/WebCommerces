@@ -1,0 +1,48 @@
+﻿@page "/Finalizar"
+@attribute [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Administrator")]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<homeLocalizer> localizer
+
+
+<AuthorizeView>
+    <Authorized>
+        @if (carrinho.CarrinhoCompras != null)
+        {
+            @if (carrinho.CarrinhoCompras.ItensCarrinho.Count > 0)
+            {
+                <ul class="list-group mb-3 sticky-top">
+                    @foreach (var item in carrinho.CarrinhoCompras.ItensCarrinho)
+                    {
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">@item.Produto.Nome</h6>
+                                <small class="text-muted">@item.Produto.Descricao</small>
+                            </div>
+                            <span class="text-muted">@((item.Quantidade * item.Produto.Valor).ToString("c"))</span>
+                        </li>
+                    }
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>@localizer[homeLocalizer.Total]</span>
+                        <strong>@carrinho.TotalCompra.ToString("C")</strong>
+                    </li>
+                </ul>
+                <WebCommerce.Client.Shared.Pagamentos.Pagamento />
+
+            }
+            else
+            {
+                <p>@localizer[homeLocalizer.NaoHaItens]</p>
+            }
+
+            <NavLink href="/">
+                <button class="btn btn-dark">@localizer[homeLocalizer.ContinuarComprando]</button>
+            </NavLink>
+        }
+        else
+        {
+            <WebCommerce.Client.Shared.Carregamento.Carregando />
+        }
+    </Authorized>
+    <NotAuthorized>
+        @if (true) { navigation.NavigateTo("/Login", true); }
+    </NotAuthorized>
+</AuthorizeView>

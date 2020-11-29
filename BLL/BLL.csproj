@@ -1,0 +1,95 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<!--<TargetFramework>netstandard2.1</TargetFramework>-->
+		<!--<LangVersion>8.0</LangVersion>-->
+		<!--<LangVersion>9.0</LangVersion>-->
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DefineConstants>DEBUG</DefineConstants>
+		<Optimize>true</Optimize>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
+		<PackageReference Include="Dapper" Version="2.0.78" />
+		<PackageReference Include="Microsoft.AspNetCore.Antiforgery" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.DataAnnotations.Validation" Version="3.2.0-rc1.20223.4" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="5.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="PagarMeCore">
+			<HintPath>..\PagarMe\PagarMeCore\bin\Release\netstandard2.0\PagarMeCore.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Library\Resources\Models\Models.Designer.cs">
+			<DependentUpon>Models.resx</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+		</Compile>
+		<Compile Update="Library\Resources\Models\Validation.Designer.cs">
+			<DependentUpon>Validation.resx</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+		</Compile>
+		<Compile Update="Library\Resources\Pages\DashBoard\Componentes.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Componentes.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Library\Resources\Pages\Error\Componentes.Designer.cs">
+			<DependentUpon>Componentes.resx</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+		</Compile>
+		<Compile Update="Library\Resources\Pages\Home\Componentes.Designer.cs">
+			<DependentUpon>Componentes.resx</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+		</Compile>
+		<Compile Update="Library\Resources\Pages\Venda\Componentes.Designer.cs">
+			<DependentUpon>Componentes.resx</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Library\Resources\Models\Models.resx">
+			<LastGenOutput>Models.Designer.cs</LastGenOutput>
+			<Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Library\Resources\Models\Validation.resx">
+			<LastGenOutput>Validation.Designer.cs</LastGenOutput>
+			<Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Library\Resources\Pages\DashBoard\Componentes.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>Componentes.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Library\Resources\Pages\Error\Componentes.resx">
+			<LastGenOutput>Componentes.Designer.cs</LastGenOutput>
+			<Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Library\Resources\Pages\Home\Componentes.resx">
+			<LastGenOutput>Componentes.Designer.cs</LastGenOutput>
+			<Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Library\Resources\Pages\Venda\Componentes.resx">
+			<LastGenOutput>Componentes.Designer.cs</LastGenOutput>
+			<Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+	</ItemGroup>
+
+</Project>

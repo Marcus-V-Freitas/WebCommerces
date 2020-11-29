@@ -1,0 +1,22 @@
+﻿@layout LoginLayout
+@page "/ListaProdutos/{id}"
+
+@if (produtos != null)
+{
+    if (produtos.Count() > 0)
+    {
+        @foreach (var produto in produtos)
+        {
+            <WebCommerce.Client.Shared.CarrinhoCompras.CarrinhoCompras ID="produto.ID" />
+        }
+    }
+    else
+    {
+
+        <ProdutoEsgotado />
+    }
+}
+else
+{
+    <Carregando />
+}

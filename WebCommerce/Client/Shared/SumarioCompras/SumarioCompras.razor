@@ -1,0 +1,22 @@
+﻿@layout LoginLayout
+
+@if (Carrinho.CarrinhoCompras != null)
+{
+    @if (Carrinho.CarrinhoCompras.ItensCarrinho.Count > 0)
+    {
+        <li>
+            <a @onclick="(()=>IrParaCarrinho())" class="btn">
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+                <span id="cart-status">
+                    @Carrinho.CarrinhoCompras.ItensCarrinho.Count
+                </span>
+            </a>
+        </li>
+    }
+}
+
+@code
+{
+
+
+}

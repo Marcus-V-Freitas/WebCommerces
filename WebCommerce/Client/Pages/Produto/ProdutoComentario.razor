@@ -1,0 +1,25 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<homeLocalizer> localizer;
+@inject Microsoft.Extensions.Localization.IStringLocalizer<validationLocalizer> validationLocalizer;
+
+<AuthorizeView>
+    <Authorized Context="authContext">
+        <EditForm Model="@ClassificacaoProduto" OnValidSubmit="Comentar">
+            <DataAnnotationsValidator />
+
+            <div class="form-group">
+                <label>@(Metodo.GetDisplayName<UsuarioClassificacaoProduto, string>(i => i.Comentario)) </label>
+                <InputTextArea class="form-control" @bind-Value="@ClassificacaoProduto.Comentario"></InputTextArea>
+                <ValidationMessage For="@(() => ClassificacaoProduto.Comentario)" />
+            </div>
+            <div class="form-group">
+                <label>@(Metodo.GetDisplayName<UsuarioClassificacaoProduto, int>(i => i.Classificacao))</label>
+                <InputNumber class="form-control" @bind-Value="@ClassificacaoProduto.Classificacao"></InputNumber>
+                <ValidationMessage For="@(() => ClassificacaoProduto.Classificacao)" />
+                <button type="submit" class="btn btn-primary">@localizer[homeLocalizer.Salvar]</button>
+            </div>
+        </EditForm>
+    </Authorized>
+    <NotAuthorized>
+        <p>@localizer[homeLocalizer.ComentarioProduto]</p>
+    </NotAuthorized>
+</AuthorizeView>

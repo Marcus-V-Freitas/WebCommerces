@@ -1,0 +1,39 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<vendaLocalizer> localizer;
+
+
+@localizer[vendaLocalizer.Frete]
+<input type="text" @bind-Value="CEP" @bind-Value:event="oninput" @onkeyup="RetornarValores" class="form-control" />
+@if (frete != null)
+{
+    <div class="form-group">
+        <label>@localizer[vendaLocalizer.ValorFrete]</label>
+        <select class="form-control" @bind-value="valor" @onchange="@Guardar" @bind-value:event="oninput">
+            @if (frete.ListaValores != null)
+            {
+                <option value="">@localizer[vendaLocalizer.MensagemSelecionar]</option>
+                @foreach (var valorPrazo in frete.ListaValores)
+                {
+                    <option value="@valorPrazo.CodTipoFrete">
+                        @valorPrazo.TipoFrete -  @valorPrazo.Prazo @(valorPrazo.Prazo == 1 ? localizer[vendaLocalizer.dia] : localizer[vendaLocalizer.dias]) - @valorPrazo.Valor.ToString("C")
+                    </option>
+                }
+            }
+        </select>
+    </div>
+}
+@code{
+    [Parameter]
+    public EventCallback<BLL.Models.ValorPrazoFrete> eventRetornarFrete { get; set; }
+
+    public BLL.Models.Frete frete { get; set; }
+
+    public void Guardar()
+    {
+        if (frete != null)
+            eventRetornarFrete.InvokeAsync(frete.ListaValores.Where(x => x.CodTipoFrete == valor).FirstOrDefault());
+    }
+
+    private string valor { get; set; }
+
+    private string CEP { get; set; }
+}

@@ -1,0 +1,101 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<vendaLocalizer> localizer
+@using cartaoClasse = BLL.Models.CartaoCredito
+
+@if (VendaViewModel != null)
+{
+    <div id="code_payment2">
+        <article class="card">
+            <div class="card-body p-5">
+                <p>@localizer[vendaLocalizer.CartaoCreditoTitulo]</p>
+                <div class="tab-content">
+                    <div class="tab-pane fade active in show" id="nav-tab-card">
+                        <EditForm Model="PagamentoViewModel" OnValidSubmit="CriarVenda">
+                            <ObjectGraphDataAnnotationsValidator />
+                            <ValidationSummary />
+                            <div class="form-group">
+                                <label>@(Metodo.GetDisplayName<cartaoClasse, string>(i => i.NomeNoCartao))</label>
+                                <select class="form-control" @onchange="@ChangeNome">
+                                    @if (VendaViewModel.NomesCartoesDeCredito != null)
+                                    {
+                                        <option value="">@localizer[vendaLocalizer.MensagemSelecionar]</option>
+                                        @foreach (var cartao in VendaViewModel.NomesCartoesDeCredito)
+                                        {
+                                            <option>
+                                                @cartao
+                                            </option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>@(Metodo.GetDisplayName<cartaoClasse, string>(i => i.NumeroCartao))</label>
+                                <div class="input-group">
+                                    <input type="text" @bind-value="PagamentoViewModel.CartaoDeCredito.NumeroCartao" placeholder="" class="form-control"
+                                           @bind-value:event="oninput" @onkeyup="TirarEspacos" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text text-muted">
+                                            <i class="fab fa-cc-visa"></i> &nbsp; <i class="fab fa-cc-amex"></i> &nbsp;
+                                            <i class="fab fa-cc-mastercard"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <label>@(Metodo.GetDisplayName<cartaoClasse, string>(i => i.VecimentoMM))</label>
+                                        <div class="input-group">
+                                            <InputText class="form-control" @bind-Value="PagamentoViewModel.CartaoDeCredito.VecimentoMM" placeholder="MM" />
+                                            <InputText class="form-control" @bind-Value="PagamentoViewModel.CartaoDeCredito.VecimentoYY" placeholder="YY" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label data-toggle="tooltip" title="">@(Metodo.GetDisplayName<cartaoClasse, string>(i => i.CodigoSeguranca)) <i class="fa fa-question-circle"></i></label>
+                                        <InputText class="form-control" @bind-Value="PagamentoViewModel.CartaoDeCredito.CodigoSeguranca" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label data-toggle="tooltip" title="">@(Metodo.GetDisplayName<cartaoClasse, int>(i => i.QuantidadeParcelas))<i class="fa fa-question-circle"></i></label>
+                                        <select class="form-control" @onchange="@Change">
+                                            @if (VendaViewModel.Parcelas != null)
+                                            {
+                                                <option value="">@localizer[vendaLocalizer.MensagemSelecionar]</option>
+                                                @foreach (var parcela in VendaViewModel.Parcelas)
+                                                {
+
+                                                    <option value="@parcela.Numero">
+                                                        @String.Format("{0}x {1} {2} - {3}: {4}", parcela.Numero, parcela.ValorPorParcela.ToString("C"), localizer[vendaLocalizer.Total], (parcela.Juros) ? "c/ juros" : "s/ juros", parcela.Valor.ToString("C"))
+                                                    </option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <WebCommerce.Client.Shared.Pagamentos.Frete eventRetornarFrete="RetornarFrete" />
+                            <input type="submit" value="@localizer[vendaLocalizer.Finalizar]" class="btn btn-primary" />
+                        </EditForm>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+}
+
+@code   {
+
+    private void TirarEspacos()
+    {
+        PagamentoViewModel.CartaoDeCredito.NumeroCartao = (PagamentoViewModel.CartaoDeCredito is null ? "" : PagamentoViewModel.CartaoDeCredito.NumeroCartao.Replace(" ", ""));
+    }
+
+    private void RetornarFrete(BLL.Models.ValorPrazoFrete frete)
+    {
+        PagamentoViewModel.FreteValor = frete;
+
+    }
+
+}

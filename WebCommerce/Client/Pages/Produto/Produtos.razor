@@ -1,0 +1,37 @@
+﻿@layout LoginLayout
+@page "/Produtos"
+
+
+<AuthorizeView>
+    <Authorized>
+        @if (ListaProdutos != null)
+        {
+            <WebCommerce.Client.Shared.ListaRazor label="Produtos"
+                                                  cabecalho="cabecalho"
+                                                  nomesPropriedadesCabecalho="campos"
+                                                  lista="ListaProdutos"
+                                                  permitirAdicionar="true"
+                                                  permitirEditar="true"
+                                                  permitirEliminar="true"
+                                                  eventBusca="Buscar"
+                                                  eventEliminar="Eliminar"
+                                                  rotaAdicionar="Produto/Cadastrar"
+                                                  rotaEditar="Produto/Editar"
+                                                  type="text"
+                                                  button="false"
+                                                  permitirExportarPDF="true"
+                                                  permitirExportarWord="true"
+                                                  permitirReporteExcel="true" />
+        }
+        else
+        {
+            <WebCommerce.Client.Shared.Carregamento.Carregando />
+        }
+    </Authorized>
+
+    <NotAuthorized>
+        @if (true) { navigation.NavigateTo("/Login", true); }
+    </NotAuthorized>
+</AuthorizeView>
+
+

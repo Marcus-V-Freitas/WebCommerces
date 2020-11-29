@@ -1,0 +1,57 @@
+﻿@using System.Net.Http
+@using WebCommerce.Client.Services;
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.WebAssembly.Http
+@using Microsoft.JSInterop
+@using WebCommerce.Client
+@using WebCommerce.Client.Shared
+@using Microsoft.AspNetCore.Components.Authorization;
+@using BLL;
+@using WebCommerce;
+@using Radzen.Blazor;
+@using Radzen;
+@using Newtonsoft.Json;
+@using BLL.Models;
+@using BLL.Enums;
+@using System.Globalization;
+@using DAL.Repositories.EntityFramework.Compras;
+@using WebCommerce.Client.Shared.MenuCategoria;
+@using sumario = WebCommerce.Client.Shared.SumarioCompras;
+@using WebCommerce.Client.Shared.Login;
+@using WebCommerce.Client.Shared.Cultura;
+@using BLL.Models.ViewModels;
+@using WebCommerce.Client.Shared.Carregamento;
+@using WebCommerce.Client.Shared.Carrosel;
+@using OfficeOpenXml;
+@using OfficeOpenXml.Style;
+@using System.IO;
+@using iText.Pdfa;
+@using iText.Kernel.Pdf;
+@using iText.Layout;
+@using iText.Layout.Element;
+@using Syncfusion.DocIO;
+@using Syncfusion.DocIO.DLS;
+@using Services.Notificacoes;
+@using Microsoft.Extensions.Localization;
+@using WebCommerce.Client.Services.HTTP.Routes;
+@inject NavigationManager navigation
+@inject IJSRuntime jsruntime;
+@inject HttpClient httpCliente;
+@inject WebCommerce.Client.Services.Autenticacao.Token.HttpInterceptorService interceptor;
+@inject WebCommerce.Client.Services.Notificacoes.ServicoNotificador Notifier;
+@inject IJSRuntime jsRuntime;
+@inject WebCommerce.Client.Services.Cookie.IBrowserCookieService browserCookieService;
+@inject WebCommerce.Client.Services.HttpRepository.IAuthenticationService AuthenticationService;
+@inject WebCommerce.Client.Services.Cookie.IJsInterop js;
+@inject NotificationService NotificationService;
+@inject WebCommerce.Client.Services.HTTP.Interface.IHttpService http;
+@inject Blazored.LocalStorage.ILocalStorageService _localStorage;
+@using Metodo = BLL.Library.ExtensionsMethods.ExtensionMethods;
+@using homeLocalizer = BLL.Library.Resources.Pages.Home.Componentes;
+@using vendaLocalizer = BLL.Library.Resources.Pages.Venda.Componentes;
+@using errorLocalizer = BLL.Library.Resources.Pages.Error.Componentes;
+@using painelLocalizer = BLL.Library.Resources.Pages.DashBoard.Componentes;
+@using validationLocalizer = BLL.Library.Resources.Models.Validation;

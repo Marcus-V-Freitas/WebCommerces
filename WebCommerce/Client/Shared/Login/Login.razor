@@ -1,0 +1,22 @@
+﻿@layout LoginLayout
+@inject Microsoft.Extensions.Localization.IStringLocalizer<homeLocalizer> localizer;
+
+<AuthorizeView>
+    <Authorized>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button">
+                @localizer[homeLocalizer.MensagemBoasVindas] @CultureInfo.CurrentCulture.TextInfo.ToTitleCase(context.User.Identity.Name)
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="dropdown-item"><a class="btn" @onclick="(()=>IrParaPainel())">@localizer[homeLocalizer.PainelControle]</a></li>
+                <li class="dropdown-item"><a class="btn" @onclick="(()=>IrParaLogout())">@localizer[homeLocalizer.Sair]</a></li>
+            </ul>
+        </li>
+    </Authorized>
+    <NotAuthorized>
+
+        <li class="dropdown-item"><a class="btn" @onclick="(()=> IrParaLogin())">Login</a></li>
+
+    </NotAuthorized>
+</AuthorizeView>

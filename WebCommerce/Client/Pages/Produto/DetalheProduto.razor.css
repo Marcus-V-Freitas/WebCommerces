@@ -1,0 +1,7 @@
+﻿article {
+    pointer-events: none !important;
+}
+
+.borderSolid {
+    border: 1px solid;
+}

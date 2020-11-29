@@ -1,0 +1,7 @@
+﻿<li class="list-group-item cultura">
+    <select @bind="cultura" class="form-control">
+        @foreach (var item in culturas)
+        {
+<option class="dropdown-item" value="@item">@item.DisplayName</option>}
+    </select>
+</li>

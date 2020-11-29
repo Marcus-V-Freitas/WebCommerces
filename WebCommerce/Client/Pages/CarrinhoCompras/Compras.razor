@@ -1,0 +1,18 @@
+﻿@layout LoginLayout
+@page "/Compras/"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<homeLocalizer> localizer
+
+<h2>@localizer[homeLocalizer.MensagemCompras]</h2>
+
+<WebCommerce.Client.Shared.CarrinhoCompras.ItensCarrinhoCompras carrinho="carrinho"
+                                                                EventAdicionar="Adicionar"
+                                                                EventRemover="Remover"
+                                                                EventRemoverTodos="RemoverTodos" />
+
+@code{
+
+
+
+}
+
+

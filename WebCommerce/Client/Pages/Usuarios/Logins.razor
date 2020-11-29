@@ -1,0 +1,37 @@
+﻿@page "/Login"
+
+@using Metodo = BLL.Library.ExtensionsMethods.ExtensionMethods
+@inject Microsoft.Extensions.Localization.IStringLocalizer<homeLocalizer> localizer
+@inject Microsoft.Extensions.Localization.IStringLocalizer<validationLocalizer> validation;
+
+<section class="container">
+    <aside class="col-sm-4">
+        <h3 class="subtitle-doc">
+            Login
+        </h3>
+        <div id="code_login_1">
+            <div class="card">
+                <article class="card-body">
+                    <EditForm Model="Usuario" OnValidSubmit="Guardar">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+                        <div class="form-group">
+                            <label>@(Metodo.GetDisplayName<LoginViewModel, string>(i => i.Email))</label>
+                            <input @bind-value="Usuario.Email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>@(Metodo.GetDisplayName<LoginViewModel, string>(i => i.Senha))</label>
+                            <input @bind-value="Usuario.Senha" class="form-control" placeholder="******" type="password">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block"> @localizer[homeLocalizer.Acessar] </button>
+                        </div>
+                    </EditForm>
+                </article>
+            </div>
+        </div>
+        <NavLink href="/Usuario/Cadastro">
+            <input type="button" value="@localizer[homeLocalizer.CadastreMensagem]" class="btn btn-dark" />
+        </NavLink>
+    </aside>
+</section>

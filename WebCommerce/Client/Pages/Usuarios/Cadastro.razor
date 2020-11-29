@@ -1,0 +1,29 @@
+﻿@page "/Usuario/Cadastro"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<validationLocalizer> _localizer;
+@inject Microsoft.Extensions.Localization.IStringLocalizer<homeLocalizer> _localizerHome;
+
+<RadzenTemplateForm Data="@UsuarioEndereco" TItem="UsuarioCadastroViewModel" Submit="@OnSubmit">
+    <ObjectGraphDataAnnotationsValidator />
+    <ValidationSummary />
+    <RadzenFieldset Text="@_localizerHome[homeLocalizer.LegendaCadastro]">
+        <RadzenTabs SelectedIndex="0">
+            <Tabs>
+                <RadzenTabsItem Text="@_localizerHome[homeLocalizer.UsuarioLegenda]">
+                    <WebCommerce.Client.Shared.Usuario.FormularioUsuario Usuario="UsuarioEndereco.Usuario" />
+                </RadzenTabsItem>
+                <RadzenTabsItem Text="@_localizerHome[homeLocalizer.EnderecoLegenda]">
+                    <WebCommerce.Client.Shared.EnderecoEntrega.FormularioEntrega Endereco="UsuarioEndereco.Endereco" />
+                </RadzenTabsItem>
+            </Tabs>
+        </RadzenTabs>
+    </RadzenFieldset>
+
+    <div class="row justify-content-center">
+        <div class="col-md-12 d-flex align-items-end justify-content-center" style="margin-top: 16px;">
+            <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="@_localizerHome[homeLocalizer.Salvar]" />
+            <NavLink href="/Login">
+                <input type="button" value="@_localizerHome[homeLocalizer.Voltar]" class="btn btn-dark" />
+            </NavLink>
+        </div>
+    </div>
+</RadzenTemplateForm>

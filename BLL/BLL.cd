@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BLL.Models.Categoria">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAABAAAEAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Models\Categoria.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.Models.Produto">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABgAAgAAAAAAAEAAAAAQAAAAAAAAEAAEA=</HashCode>
+      <FileName>Models\Produto.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Categoria" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BLL.Models.Venda">
+    <Position X="4.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACACAAAAACAAAAEAACAAAAAAAAAgQAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Models\Venda.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Pedido" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BLL.Models.ItemVenda">
+    <Position X="4.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAQgEAAAAAAAAAAAAAAAAAAAAAQAAAIAAE=</HashCode>
+      <FileName>Models\ItemVenda.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Produto" />
+      <Property Name="Venda" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BLL.Models.Pedido">
+    <Position X="7.25" Y="1.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAASAAAQAAAACJAAACAABAAEEAAAAABQAAAEAgAAAAA=</HashCode>
+      <FileName>Models\Pedido.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Usuario" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BLL.Models.Usuario">
+    <Position X="10.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAACAAAAwCBAQCAAgAAAAACAACAAAAAAAAACAAEBEAg=</HashCode>
+      <FileName>Models\Usuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

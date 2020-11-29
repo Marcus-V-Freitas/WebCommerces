@@ -1,0 +1,27 @@
+﻿@page "/Usuario/EnderecoEntrega/"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<homeLocalizer> _homeLocalizer;
+@inject Microsoft.Extensions.Localization.IStringLocalizer<validationLocalizer> _localizer;
+
+<AuthorizeView>
+    <Authorized Context="authContext">
+        @if (Endereco is not null)
+        {
+            <RadzenTemplateForm Data="@Endereco" TItem="BLL.Models.EnderecoEntrega" Submit="@OnSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <FormularioEntrega Endereco="Endereco" />
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="@_homeLocalizer[homeLocalizer.Salvar]" />
+                <NavLink href="/Usuario/DashBoard">
+                    <input type="button" value="@_homeLocalizer[homeLocalizer.Voltar]" class="btn btn-dark" />
+                </NavLink>
+            </RadzenTemplateForm>
+        }
+        else
+        {
+            <Carregando />
+        }
+    </Authorized>
+    <NotAuthorized>
+        <Redirecionar />
+    </NotAuthorized>
+</AuthorizeView>

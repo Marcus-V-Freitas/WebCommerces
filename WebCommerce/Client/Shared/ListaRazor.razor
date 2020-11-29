@@ -1,0 +1,226 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<homeLocalizer> localizer
+
+@if (lista == null)
+{
+    <WebCommerce.Client.Shared.Carregamento.Carregando />
+}
+else
+{
+    <div>
+        @if (permitirAdicionar)
+        {
+
+            <NavLink href="@rotaAdicionar">
+                <button class="btn btn-primary">@localizer[homeLocalizer.Adicionar]</button>
+            </NavLink>
+
+
+        }
+        @if (permitirReporteExcel)
+        {
+            <a @onclick="exportarExcel" class="btn btn-secondary" href="@excel">
+                @localizer[homeLocalizer.Exportar] Excel
+            </a>
+        }
+
+        @if (permitirExportarPDF)
+        {
+            <button @onclick="exportarPDF" class="btn btn-info">@localizer[homeLocalizer.Exportar] PDF</button>
+        }
+
+        @if (permitirExportarWord)
+        {
+            <a @onclick="exportarWord" class="btn btn-dark" href="@word">
+                @localizer[homeLocalizer.Exportar] Word
+            </a>
+        }
+
+
+
+    </div>
+    @if (type != "none")
+    {
+        <label>@label</label>
+        @if (type == "text")
+        {
+
+            @if (button == true)
+            {
+                <div class="mb-4" style="display:grid;grid-template-columns:8fr 1fr">
+
+                    <input type="text" @bind-value="valor" class="form-check form-control"
+                           @bind-value:event="oninput" />
+                    <button class="btn btn-primary" @onclick="Busca">Buscar</button>
+                </div>
+            }
+            else
+            {
+                <div class="mb-4">
+
+                    <input type="text" @bind-value="valor" class="form-check form-control"
+                           @bind-value:event="oninput" @onkeyup="Busca" />
+
+                </div>
+            }
+
+
+        }
+        else if (type == "combobox")
+        {
+            if (button)
+            {
+                <div class="mb-4" style="display:grid;grid-template-columns:8fr 1fr">
+                    <select @bind-value="valor" class="form form-control" @bind-value:event="oninput">
+                        <option value="">@localizer[homeLocalizer.MensagemSelecionar]</option>
+                        @foreach (var item in combobox)
+                        {
+                            <option value="@item.GetType().GetProperty(valueMember).GetValue(item)">
+                                @item.GetType().GetProperty(displayMember).GetValue(item)
+                            </option>
+                        }
+                    </select>
+                    <input type="button" value="@localizer[homeLocalizer.Buscar]" class="btn btn-primary" @onclick="Busca" />
+                </div>
+
+            }
+            else
+            {
+                <div class="mb-4" style="display:grid;grid-template-columns:8fr 1fr">
+                    <select @bind-value="valor" class="form form-control" @bind-value:event="oninput"
+                            @onchange="Busca">
+                        <option value="">@localizer[homeLocalizer.MensagemSelecionar]</option>
+                        @foreach (var item in combobox)
+                        {
+                            <option value="@item.GetType().GetProperty(valueMember).GetValue(item)">
+                                @item.GetType().GetProperty(displayMember).GetValue(item)
+                            </option>
+                        }
+                    </select>
+
+                </div>
+            }
+
+        }
+    }
+
+    <table class="table" id="tabla">
+
+        <thead>
+            <tr>
+                @foreach (string cab in cabecalho)
+                {
+                    <td>@cab</td>
+                }
+                @if (permitirEliminar == true || permitirEditar == true)
+                {
+                    <td>@localizer[homeLocalizer.Operacoes]</td>
+                }
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @{
+                List<object> listaRetornar = new List<object>();
+                int indiceValor;
+                if (indiceVal > 1)
+                {
+                    indiceValor = indiceVal;
+                }
+                else
+                {
+                    indiceValor = 1;
+                }
+
+                int inicio = indiceValor * numeroRegistrosPagina - numeroRegistrosPagina;
+                int fin = indiceValor * numeroRegistrosPagina;
+
+                @for (int i = inicio; i < fin; i++)
+                {
+                    if (i < lista.Length)
+                    {
+                        listaRetornar.Add(lista[i]);
+                    }
+                }
+
+            }
+
+
+            @foreach (object obj in listaRetornar)
+            {
+                <tr>
+                    @foreach (var propiedad in nomesPropriedadesCabecalho)
+                    {
+
+                        <td>@obj.GetType().GetProperty(propiedad).GetValue(obj).ToString()</td>
+
+                    }
+                    @if (permitirEliminar == true || permitirEditar == true)
+                    {
+                        <td>
+                            @if (permitirEditar)
+                            {
+
+                                <button class="btn btn-primary"
+                                        @onclick="@(()=>Editar(@obj.GetType().GetProperties()[0].GetValue(@obj).ToString()))">
+                                    @localizer[homeLocalizer.Editar]
+                                </button>
+
+
+                            }
+
+
+                            @if (permitirEliminar)
+                            {
+                                <button class="btn btn-danger"
+                                        data-toggle="modal" data-target="#Modais"
+                                        @onclick="@(()=>Eliminar(@obj.GetType().GetProperties()[0].GetValue(@obj).ToString()))">
+                                    @localizer[homeLocalizer.Excluir]
+                                </button>
+
+                                <WebCommerce.Client.Shared.Mensagens.MensagemExclusao id="@valorEliminar"
+                                                                                      eventEliminar="EliminarDados" />
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+
+
+
+        </tbody>
+
+        @{
+            int inicioPaginado = inicio + 1;
+            int finPagina = inicioPaginado + numeroRegistrosPagina - 1;
+            if (finPagina > lista.Length)
+            {
+                finPagina = lista.Length;
+            }
+        }
+
+
+    </table>
+
+    <div class="dataTables_info" id="example_info" role="status"
+         aria-live="polite">
+        @string.Format(localizer[homeLocalizer.MensagemQuantidadeRegistros], inicioPaginado, finPagina, lista.Length)
+    </div>
+
+
+    <div class="dataTables_paginate paging_simple_numbers">
+        <span>
+            @for (int i = 1; i <= numeroPaginas(); i++)
+            {
+                int data = i;
+                <button @onclick="@( e =>Paginar(data))"
+                        class="paginate_button " aria-controls="example"
+                        data-dt-idx="1" tabindex="0">
+                    @i
+                </button>
+            }
+        </span>
+    </div>
+}

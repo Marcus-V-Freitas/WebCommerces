@@ -1,0 +1,18 @@
+﻿@layout LoginLayout
+@page "/"
+
+@if (homeView.ProdutoAVenda != null)
+{
+    <Carrosel />
+
+    <div class="row">
+        @foreach (var produto in homeView.ProdutoAVenda)
+        {
+            <WebCommerce.Client.Shared.CarrinhoCompras.CarrinhoCompras ID="produto.ID" />
+        }
+    </div>
+}
+else
+{
+    <Carregando />
+}

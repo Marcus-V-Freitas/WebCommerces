@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<StartupObject>WebCommerce.Server.Program</StartupObject>
+		<UserSecretsId>6351ad9a-75c6-4fa4-a201-89a713223f33</UserSecretsId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DefineConstants>DEBUG</DefineConstants>
+		<DocumentationFile>WebCommerce.Server.xml</DocumentationFile>
+		<Optimize>true</Optimize>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="automapper" Version="10.1.1" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+		<PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
+		<PackageReference Include="IdentityModel" Version="4.4.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.DataAnnotations.Validation" Version="3.2.0-rc1.20223.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="5.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.0" />
+		<PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.8.0" />
+		<PackageReference Include="Serilog" Version="2.10.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
+		<PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
+		<PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="6.0.1" />
+		<PackageReference Include="Syncfusion.Blazor" Version="18.3.0.50" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
+		<PackageReference Include="System.ServiceModel.Duplex" Version="4.8.0" />
+		<PackageReference Include="System.ServiceModel.Http" Version="4.8.0" />
+		<PackageReference Include="System.ServiceModel.NetTcp" Version="4.8.0" />
+		<PackageReference Include="System.ServiceModel.Security" Version="4.8.0" />
+
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\DAL\DAL.csproj" />
+		<ProjectReference Include="..\Client\WebCommerce.Client.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="PagarMeCore">
+			<HintPath>..\..\PagarMe\PagarMeCore\bin\Release\netstandard2.0\PagarMeCore.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<WCFMetadata Include="Connected Services" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Connected Services\" />
+	</ItemGroup>
+
+
+</Project>

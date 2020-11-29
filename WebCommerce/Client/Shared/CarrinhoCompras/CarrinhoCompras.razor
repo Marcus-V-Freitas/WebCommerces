@@ -1,0 +1,38 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<homeLocalizer> localizer
+
+@if (produto.Produto != null)
+{
+    <div class="col-sm-4 col-lg-4 col-md-4">
+        <div class="thumbnail">
+            <img src="@produto.Produto.ImageThumbnailUrl" alt="image for candy shop" />
+
+            <div class="caption">
+                <h3 class="pull-right">@produto.Produto.Valor.ToString("c")</h3>
+                <h3 style="color:#337ab7">@produto.Produto.Nome</h3>
+                <p>@produto.Produto.Descricao</p>
+                <article>
+                    <RadzenRating Stars="5" Style=" pointer-events: none; opacity: 0.4;" Value="(produto.Produto.MediaProduto) " />
+                </article>
+            </div>
+            <div class="addToCart">
+                <p class="button">
+                    @if (produto.QuantidadeDisponivel > 0)
+                    {
+                        <a class="btn btn-primary" @onclick="(() => Adicionar(produto.Produto.ID))">+</a>
+                    }
+                    else
+                    {
+                        <b class="alert-danger">@localizer[homeLocalizer.Esgotado]</b>
+                    }
+
+                    <a class="btn btn-primary" @onclick="(() => Detalhes(produto.Produto.ID))">@localizer[homeLocalizer.Sobre]</a>
+                </p>
+            </div>
+        </div>
+    </div>
+}
+@code{
+
+
+
+}

@@ -1,0 +1,233 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebCommerce.Server</name>
+    </assembly>
+    <members>
+        <member name="M:WebCommerce.Server.Controllers.CarrinhoComprasController.Index">
+            <summary>
+            Retorna todos os itens do carrinho
+            </summary>
+            <returns> Lista de Itens do Carrinho </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.CarrinhoComprasController.AdicionarNoCarrinho(System.Int32)">
+            <summary>
+            Adiciona uma unidade do Produto no carrinho
+            </summary>
+            <param name="Id">Código do Produto</param>
+            <returns> Status da Operação </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.CarrinhoComprasController.RemoverNoCarrinho(System.Int32)">
+            <summary>
+            Atualizar a quantidade do produto no carrinho para 
+            menos 1 unidade
+            </summary>
+            <param name="Id"> Código do Produto </param>
+            <returns> Status da Operação </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.CarrinhoComprasController.LimparCarrinho">
+            <summary>
+            Remove todos os itens do carrinho
+            </summary>
+            <returns> Status da Operação </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.CarrinhoComprasController.CalcularFrete(System.String)">
+            <summary>
+            Retorna os valores cobrados de frete do
+            cep de origem (Empresa) ao cep de destino
+            </summary>
+            <param name="cepDestino"> CEP do Usuário </param>
+            <returns> Lista com os valores de acordo com tipo de frete </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.CategoriaController.ObterTodos(System.String)">
+            <summary>
+            Retorna todas as categorias cadastradas
+            baseadas ou não no filtro
+            </summary>
+            <param name="data"> Filtro de busca por nome da categoria </param>
+            <returns> Lista de Categorias </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.CategoriaController.Cadastrar(BLL.Models.Categoria)">
+            <summary>
+            Adiciona uma nova categoria na base de dados
+            </summary>
+            <param name="categoria"> Objeto Categoria </param>
+            <returns> Status da Operação </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.CategoriaController.Atualizar(System.Int32,BLL.Models.Categoria)">
+            <summary>
+            Atualiza uma categoria já existente
+            </summary>
+            <param name="id"> Código da Categoria </param>
+            <param name="categoria"> Objeto Categoria </param>
+            <returns> Status da Operação </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.CategoriaController.ObterId(System.Int32)">
+            <summary>
+            Obtém a categoria referente ao código passado
+            </summary>
+            <param name="id"> Código da Categoria </param>
+            <returns> Categoria </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.CategoriaController.Deletar(System.Int32)">
+            <summary>
+            Remove a categoria da base de dados
+            </summary>
+            <param name="id"> Código da Categoria </param>
+            <returns> Status da Operação </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.CulturaController.MudarCultura(System.String)">
+            <summary>
+            Muda a Cultura utilizada nos retornos da WebApi
+            </summary>
+            <param name="cultura"> Nova Cultura (sigla) </param>
+            <returns> Status Operação </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.CulturaController.CulturaAtual">
+            <summary>
+            Pega a cultura atual utilizada pela WebApi
+            </summary>
+            <returns> Cultura Utilizada para formatos e UI </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.HomeController.Index">
+            <summary>
+            Retorna todos os produtos que vão aparecer na página principal
+            </summary>
+            <returns> Lista de Produtos </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.PainelController.RetornarDadosCliente(BLL.Models.ViewModels.FiltroDataViewModel,System.String)">
+            <summary>
+            Retorna todos os dados referentes as compras feitas pelo cliente no período informado
+            </summary>
+            <param name="filtro"> filtro de períodos </param>
+            <param name="authorization"> token de autorização </param>
+            <returns> todos os daos referentes as feitas pelo client no período </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.PedidoController.RetornarPedidosData(BLL.Models.ViewModels.FiltroDataViewModel,System.String)">
+            <summary>
+            Retorna todos os pedidos feitos durante o período do filtro pelo usuário
+            </summary>
+            <param name="filtro"> filtro do período escolhido </param>
+            <param name="authorization"> token de Autorização </param>
+            <returns> Todos os pedidos feitos pelo usuário </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.ProdutoController.ObterTodos(System.String)">
+            <summary>
+            Retorna todos os produtos cadastrados
+            baseados ou não no filtro
+            </summary>
+            <param name="data"> Filtro de busca por nome do produto </param>
+            <returns> Lista de Produtos </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.ProdutoController.ObterTodosCategoria(System.Int32)">
+            <summary>
+            Retorna todos os produtos baseados na categoria passada
+            </summary>
+            <param name="id"> Código da Categoria </param>
+            <returns> Lista de Produtos </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.ProdutoController.Cadastrar(BLL.Models.Produto)">
+            <summary>
+            Adiciona um novo produto na base de dados
+            </summary>
+            <param name="produto"> Objeto Produto </param>
+            <returns> Status da Operação </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.ProdutoController.Atualizar(System.Int32,BLL.Models.Produto)">
+            <summary>
+            Atualiza um produto já existente
+            </summary>
+            <param name="id"> Código do Produto </param>
+            <param name="produto"> Objeto Produto </param>
+            <returns> Status da Operação </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.ProdutoController.ObterId(System.Int32,System.Boolean)">
+            <summary>
+            Obtém o produto referente ao código passado
+            </summary>
+            <param name="id"> Código do Produto </param>
+            <param name="viewModel"> (Opcional) Indica se é uma ViewModel do produto ou não, por padrão é true  </param>
+            <returns> Produto </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.ProdutoController.Eliminar(System.Int32)">
+            <summary>
+            Remove o produto da base de dados
+            </summary>
+            <param name="id"> Código do produto </param>
+            <returns> Status da Operação </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.ProdutoController.Classificar(BLL.Models.UsuarioClassificacaoProduto,System.String)">
+            <summary>
+            Adiociona uma nova classificação do usuário para o produto informado
+            </summary>
+            <param name="produto"> informações referentes ao produto e a classificação do usuário </param>
+            <param name="authorization"> token de autorização </param>
+            <returns> Informatitavo se os dados foram inseridos com sucesso </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.UsuarioController.CriarUsuario(BLL.Models.ViewModels.UsuarioCadastroViewModel)">
+            <summary>
+            Adiciona um novo usuário na base de dados
+            </summary>
+            <param name="usuario"> Objeto Usuário </param>
+            <returns> Status da Operação </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.UsuarioController.AutorizacaoToken(BLL.Models.ViewModels.LoginViewModel)">
+            <summary>
+            Faz o Login do Usuário no sistema e gera um token para validar o
+            período de permanência no sistema
+            </summary>
+            <param name="usuario"> Objeto Usuário </param>
+            <returns> Token Gerado </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.UsuarioController.Refresh(BLL.Models.DTOs.RefreshTokenDto)">
+            <summary>
+            Atualiza o Token Gerado quando o mesmo expirar
+            </summary>
+            <param name="tokenDto"> Token do Usuário </param>
+            <returns> Token Novo Gerado </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.UsuarioController.TrocarSenha(BLL.Models.ViewModels.SenhaViewModel,System.String)">
+            <summary>
+            Atualiza a Senha do Usuário
+            </summary>
+            <param name="senha"> Nova Senha </param>
+            <param name="authorization"> Token de Autorização </param>
+            <returns> Indicativo se a senha foi trocada com sucesso </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.UsuarioController.ObterUsuario(System.String)">
+            <summary>
+            Obter o usuário e suas informações pelo seu token
+            </summary>
+            <param name="authorization"> token de autorização </param>
+            <returns> Dados do usuário </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.UsuarioController.AtualizarUsuario(BLL.Models.Usuario,System.String)">
+            <summary>
+            Atualiza os dados do usuário passados por parâmetros
+            </summary>
+            <param name="usuario"> objeto do usuário </param>
+            <param name="authorization"> token de autorização </param>
+            <returns> Indicativo se os dados do usuário foram atualizado </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.VendaController.CriarVenda(BLL.Models.ViewModels.PagamentoViewModel,System.String)">
+            <summary>
+            Realiza a venda no sistema e faz a movimentação do estoque dos produtos
+            que foram comprados
+            </summary>
+            <param name="pagamento"> Objeto Pagamento </param>
+            <param name="authorization">Token de Autorizacao</param>
+            <returns> Status da Operação </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Controllers.VendaController.CalcularParcelas">
+            <summary>
+            Retorna os dados referentes ao cadastro da venda no sistema
+            </summary>
+            <returns> Objeto Venda com as opções de seleção do usuário </returns>
+        </member>
+        <member name="M:WebCommerce.Server.Dependency.StartupDependency.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Swagger - Documentação das API's
+            </summary>
+        </member>
+    </members>
+</doc>

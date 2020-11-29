@@ -1,0 +1,116 @@
+﻿@page "/Usuario/DashBoard"
+@attribute [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Administrator")]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<painelLocalizer> localizer;
+@inject Microsoft.Extensions.Localization.IStringLocalizer<validationLocalizer> validation;
+
+<AuthorizeView>
+    <Authorized Context="authContext">
+        @if (Painel != null)
+        {
+
+            <RadzenTemplateForm TItem="FiltroDataViewModel" Data=@filtro Submit=@OnClick Style="width:100%; height:100%;">
+                <RadzenFieldset>
+                    <div class="row">
+                        <RadzenMenu>
+                            <RadzenMenuItem Text="Trocar Senha" Path="Usuario/TrocarSenha" Icon="payment"></RadzenMenuItem>
+                            <RadzenMenuItem Text="Endereço" Path="Usuario/EnderecoEntrega" Icon="account_balance_wallet"></RadzenMenuItem>
+                            <RadzenMenuItem Text="Conta" Path="Usuario/Conta/" Icon="account_circle"></RadzenMenuItem>
+                        </RadzenMenu>
+                        <hr />
+
+                        <div class="col-md-6">
+                            <div>@localizer[painelLocalizer.QuantidadeCompras]</div>
+                            <b>@Painel.QuantidadeCompras</b>
+                            <div style="margin-top:20px">@localizer[painelLocalizer.TotalDespesas]</div>
+                            <b>@Painel.TotalDespesas.ToString("C")</b>
+                            <div style="margin-top:20px">
+                                <RadzenButton Click=@(() => VerTodos()) Text="@localizer[painelLocalizer.VerTodos]" ButtonStyle="ButtonStyle.Secondary" />
+                            </div>
+                        </div>
+                        <div class="col-md-6  col-sm-12 p-4">
+                            <h2>@localizer[painelLocalizer.filtroDatas]</h2>
+                            <h4>@localizer[painelLocalizer.DataInicial]</h4>
+                            <RadzenDatePicker @bind-Value=@filtro.DataInical DateFormat="d" Name="DataInical" />
+                            <RadzenRequiredValidator Component="DataInical" Text=@localizer[validationLocalizer.CampoGenericoObrigatorio] Style="position: absolute" />
+                            <h4>@localizer[painelLocalizer.DataFinal]</h4>
+                            <RadzenDatePicker @bind-Value=@filtro.Datafinal DateFormat="d" Name="Datafinal" />
+                            <RadzenRequiredValidator Component="Datafinal" Text=@localizer[validationLocalizer.CampoGenericoObrigatorio] Style="position: absolute" />
+                            <RadzenButton ButtonType="ButtonType.Submit" Text="@localizer[painelLocalizer.Buscar]"></RadzenButton>
+                        </div>
+                        <div class="col-md-6 col-sm-12 p-4">
+                            <h3><strong>@localizer[painelLocalizer.statusDepesas]</strong></h3>
+                            @if (Painel.ListaDespesas is not null && Painel.ListaDespesas.Count() > 0)
+                            {
+                                <RadzenChart>
+                                    <RadzenPieSeries Data="@Painel.ListaDespesas" CategoryProperty="TipoDeDespesa" ValueProperty="ValorDespesa" Title="@filtro.Datafinal.Year.ToString()" />
+                                </RadzenChart>
+                            }
+                            else
+                            {
+                                <p>@localizer[painelLocalizer.NaoHaDados]</p>
+                            }
+                        </div>
+                        <div class="col-md-6 col-sm-12 p-4">
+                            <h3><strong>@localizer[painelLocalizer.formaComprados]</strong></h3>
+                            @if (Painel.FormasPagamento is not null && Painel.FormasPagamento.Count() > 0)
+                            {
+                                <RadzenChart>
+                                    <RadzenDonutSeries Data="@Painel.FormasPagamento" CategoryProperty="TipoDeDespesa" Title="@filtro.Datafinal.Year.ToString()" ValueProperty="ValorDespesa">
+                                        <TitleTemplate>
+                                        </TitleTemplate>
+                                    </RadzenDonutSeries>
+                                </RadzenChart>
+                            }
+                            else
+                            {
+                                <p>@localizer[painelLocalizer.NaoHaDados]</p>
+                            }
+                        </div>
+                        <div class="col-md-6 col-sm-12 p-4">
+                            <h3><strong>@localizer[painelLocalizer.produtosComprados]</strong></h3>
+                            @if (Painel.ComparativoAnual is not null && Painel.ComparativoAnual.Count() > 0)
+                            {
+                                <RadzenChart>
+                                    <RadzenColumnSeries Data="@Painel.ComparativoAnual" CategoryProperty="TipoDeDespesa" Title="@filtro.Datafinal.Year.ToString()" LineType="LineType.Dashed" ValueProperty="ValorDespesa" />
+                                    <RadzenColumnOptions Radius="5" />
+                                    <RadzenValueAxis>
+                                        <RadzenGridLines Visible="true" />
+                                        <RadzenAxisTitle Text="@localizer[painelLocalizer.quantidadeComprada]" />
+                                    </RadzenValueAxis>
+                                </RadzenChart>
+                            }
+                            else
+                            {
+                                <p>@localizer[painelLocalizer.NaoHaDados]</p>
+                            }
+                        </div>
+                        <div class="col-md-6 col-sm-12 p-4">
+                            <h3><strong>@localizer[painelLocalizer.mesDistribuicao]</strong></h3>
+                            @if (Painel.ComparativoMensal is not null && Painel.ComparativoMensal.Count() > 0)
+                            {
+                                <RadzenChart>
+                                    <RadzenLineSeries Data="@Painel.ComparativoMensal" CategoryProperty="TipoDeDespesa" ValueProperty="ValorDespesa" Title="@filtro.Datafinal.Year.ToString()">
+                                        <RadzenMarkers MarkerType="MarkerType.Circle" />
+                                    </RadzenLineSeries>
+                                    <RadzenCategoryAxis Padding="20" />
+                                    <RadzenValueAxis>
+                                        <RadzenGridLines Visible="true" />
+                                        <RadzenAxisTitle Text="@localizer[painelLocalizer.quantidadeComprada]" />
+                                    </RadzenValueAxis>
+                                </RadzenChart>
+                            }
+                            else
+                            {
+                                <p>@localizer[painelLocalizer.NaoHaDados]</p>
+                            }
+                        </div>
+                    </div>
+                </RadzenFieldset>
+            </RadzenTemplateForm>
+
+        }
+    </Authorized>
+    <NotAuthorized>
+        <Redirecionar />
+    </NotAuthorized>
+</AuthorizeView>
